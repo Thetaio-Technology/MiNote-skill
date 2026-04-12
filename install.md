@@ -77,6 +77,15 @@ MINOTE_TARGET_URL=https://i.mi.com/note/#/
 MINOTE_REMOTE_DEBUGGING_PORT=9222
 ```
 
+字段说明：
+
+- `MINOTE_RUNTIME_ROOT`：内置运行层根目录
+- `MINOTE_CHROME_EXE`：本地 Chrome 可执行文件路径
+- `MINOTE_CHROMEDRIVER_EXE`：本地 ChromeDriver 路径
+- `MINOTE_CHROME_USER_DATA_DIR`：项目使用的 Chrome 用户数据目录
+- `MINOTE_TARGET_URL`：默认打开的小米云笔记页面
+- `MINOTE_REMOTE_DEBUGGING_PORT`：Chrome 远程调试端口
+
 ### 3. Install Python Dependencies
 
 Create and activate a virtual environment if you want an isolated setup.
