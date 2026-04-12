@@ -11,6 +11,8 @@ def _load_dotenv() -> None:
         line = raw_line.strip()
         if not line or line.startswith("#") or "=" not in line:
             continue
+        if " #" in line:
+            line = line.split(" #", 1)[0].rstrip()
         key, value = line.split("=", 1)
         key = key.strip()
         value = value.strip().strip('"').strip("'")
