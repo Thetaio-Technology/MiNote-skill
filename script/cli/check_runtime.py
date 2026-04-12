@@ -33,8 +33,8 @@ def main() -> None:
         "chromedriver_exe_exists": CHROMEDRIVER_EXE.exists(),
         "chrome_user_data_dir": str(CHROME_USER_DATA_DIR),
         "chrome_user_data_dir_parent_exists": CHROME_USER_DATA_DIR.parent.exists(),
-        "target_url": TARGET_URL,
         "remote_debugging_port": REMOTE_DEBUGGING_PORT,
+        "target_url": TARGET_URL,
     }
 
     errors = []
