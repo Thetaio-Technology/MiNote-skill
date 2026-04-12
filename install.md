@@ -49,7 +49,7 @@ cd minote-skill
 
 ### 2. Create `.env`
 
-Copy `.env.example` to `.env` and fill in the actual local paths.
+Copy `.env.example` to `.env` and use `.env.example` as the single source of truth for all environment fields and inline comments.
 
 Example:
 
@@ -57,36 +57,13 @@ Example:
 copy .env.example .env
 ```
 
-Required fields:
+Then edit `.env` directly according to the Chinese comments already included in `.env.example`.
 
-- `MINOTE_RUNTIME_ROOT`
-- `MINOTE_CHROME_EXE`
-- `MINOTE_CHROMEDRIVER_EXE`
-- `MINOTE_CHROME_USER_DATA_DIR`
-- `MINOTE_REMOTE_DEBUGGING_PORT`
+Rules:
 
-Typical values:
-
-```env
-MINOTE_RUNTIME_ROOT=script
-MINOTE_CHROME_EXE=C:\Program Files\Google\Chrome\Application\chrome.exe
-MINOTE_CHROMEDRIVER_EXE=script\bin\chromedriver.exe
-MINOTE_CHROME_USER_DATA_DIR=script\chrome_profile
-MINOTE_REMOTE_DEBUGGING_PORT=9222
-```
-
-字段说明：
-
-- `MINOTE_RUNTIME_ROOT`：内置运行层根目录，默认建议填相对路径 `script`
-- `MINOTE_CHROME_EXE`：本地 Chrome 可执行文件路径
-- `MINOTE_CHROMEDRIVER_EXE`：ChromeDriver 路径，默认建议填相对路径 `script\bin\chromedriver.exe`
-- `MINOTE_CHROME_USER_DATA_DIR`：项目使用的 Chrome 用户数据目录，默认建议填相对路径 `script\chrome_profile`
-- `MINOTE_REMOTE_DEBUGGING_PORT`：Chrome 远程调试端口，通常保持默认即可
-
-说明：
-
-- `MINOTE_RUNTIME_ROOT`、`MINOTE_CHROMEDRIVER_EXE`、`MINOTE_CHROME_USER_DATA_DIR` 默认都推荐使用相对路径
-- 只有在 debug 模式或临时指向外部 `minote-driver` 仓库时，才建议改成具体绝对路径
+- Treat `.env.example` as the only canonical template
+- Prefer the relative paths already provided in `.env.example`
+- Only switch to absolute paths when debugging or temporarily pointing to an external `minote-driver` repository
 
 ### 3. Install Python Dependencies
 
@@ -107,7 +84,7 @@ Download a `chromedriver.exe` version that matches your installed Chrome version
 Place it at:
 
 ```text
-bin/chromedriver.exe
+script/bin/chromedriver.exe
 ```
 
 Notes:
@@ -115,6 +92,7 @@ Notes:
 - `chromedriver.exe` is required for runtime execution
 - It is intentionally not committed to the repository
 - If the version does not match Chrome, browser startup may fail
+- Create the `script/bin/` directory manually if it does not exist yet
 
 ### 5. Verify Local Runtime Assumptions
 
@@ -146,7 +124,11 @@ From the `minote-skill` repository root, run:
 python script/cli/open_mi_cloud.py
 ```
 
-This opens Chrome with the project-local browser profile.
+This command now performs runtime validation before opening Chrome.
+
+If the environment is invalid, it prints the same structured check result as `python script/cli/check_runtime.py` and exits without launching the browser.
+
+If validation passes, it opens Chrome with the project-local browser profile.
 
 On first use:
 

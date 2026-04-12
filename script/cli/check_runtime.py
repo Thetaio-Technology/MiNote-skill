@@ -19,8 +19,7 @@ from minote.config import (
 )
 
 
-def main() -> None:
-    sys.stdout.reconfigure(encoding="utf-8")
+def collect_runtime_status() -> dict:
     env_path = CONFIG_PROJECT_ROOT / ".env"
 
     checks = {
@@ -49,14 +48,19 @@ def main() -> None:
     if not checks["chrome_user_data_dir_parent_exists"]:
         errors.append("Parent directory of MINOTE_CHROME_USER_DATA_DIR does not exist")
 
-    payload = {
+    return {
         "ok": not errors,
         "checks": checks,
         "errors": errors,
     }
+
+
+def main() -> None:
+    sys.stdout.reconfigure(encoding="utf-8")
+    payload = collect_runtime_status()
     print(json.dumps(payload, ensure_ascii=False, indent=2))
 
-    if errors:
+    if payload["errors"]:
         raise SystemExit(1)
 
 
