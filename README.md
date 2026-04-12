@@ -54,11 +54,7 @@
 
 ## 当前能力
 
-当前第一个能力包是：
-
-- `minote-todo`
-
-它已经能完成：
+当前它已经能完成：
 
 - 读取未完成待办
 - 读取已完成待办
@@ -84,14 +80,18 @@
 - `minote-driver`：执行层、CLI、验证脚本、运行时约束
 - `minote-skill`：skill 定义、调用协议、上层能力包装
 
-driver 负责真实执行，skill 负责稳定暴露能力。
+当前 `minote-skill` 自带一份本地运行层副本，后续可以继续从 `minote-driver` 同步更新。
+
+driver 负责能力演进，skill 负责对外发布和稳定暴露能力。
 
 ## 仓库内容
 
 这个仓库是 skill-facing 仓库，主要包含：
 
 - `README.md`：展示页和定位说明
+- `install.md`：运行环境要求和安装教程
 - `SKILL.md`：顶层 skill 定义
+- `script/`：本地运行层和执行入口
 - `skills/minote-todo/SKILL.md`：具体能力包定义
 - `skills/minote-todo/interface.md`：接口契约
 - `skills/minote-todo/examples.md`：调用示例
@@ -99,11 +99,14 @@ driver 负责真实执行，skill 负责稳定暴露能力。
 
 ## 运行时说明
 
-`minote-skill` 自身不是浏览器自动化 runtime。
+`minote-skill` 现在内置一份本地运行层，真实执行入口位于 `script/`。
 
-底层执行由 `minote-driver` 提供。这个仓库更适合：
+这个仓库更适合：
 
 - 对外展示 skill 能力
 - 承载 agent 集成文档
 - 承载机器可读 manifest
 - 作为从 `minote-driver` 同步发布出来的 skill 仓库
+- 在单仓库内完成 skill 安装与执行
+
+如果你需要真实执行，请先阅读：`install.md`

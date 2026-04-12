@@ -1,5 +1,10 @@
 __pycache__/
 *.py[cod]
 
+.env
+
+script/bin/
+script/chrome_profile/
+
 .DS_Store
 Thumbs.db
