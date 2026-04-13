@@ -7,14 +7,17 @@
 ### 是把小米云笔记待办，变成 AI 和人都能直接调用的能力。
 
 [![Layer Skill](https://img.shields.io/badge/Layer-Skill-8A2BE2.svg)](#minote-skill)
-[![Runtime minote--driver](https://img.shields.io/badge/Runtime-minote--driver-111827.svg)](#它和-minote-driver-是什么关系)
-[![Local First](https://img.shields.io/badge/Local-First-0EA5E9.svg)](#它适合谁)
+[![Runtime minote--driver](https://img.shields.io/badge/Runtime-minote--driver-111827.svg)](#它是什么)
+[![Local First](https://img.shields.io/badge/Local-First-0EA5E9.svg)](#运行时说明)
 [![Todo Ready](https://img.shields.io/badge/MiNote-Todo_Ready-22C55E.svg)](#当前能力)
 
 </div>
 
 <div align="center">
 **把你的小米云笔记接入ai agent**
+
+<br/>
+
 **让Ai更靠近你一点**
 
 </div>
@@ -25,7 +28,11 @@
 
 你想让 AI 读取你在手机上设置好的待办？
 
-你想让 AI 帮你新建管理你的代办然后同步到手机上？
+<br/>
+
+你想让 AI 帮你新建管理你的待办然后同步到手机上？
+
+<br/>
 
 你想把小米云笔记接进自己的产品或工作流？`minote-skill` 直接给你一层可调用封装。
 
@@ -35,12 +42,13 @@
 
 ## 它是什么？
 
-在此之前，我们手搓过一个针对小米云笔记的底层驱动：[`minote-driver`](https://github.com/thetaio/minote-driver.git)。它确实能把事干成，但仓库里塞满了 Python 源码和繁琐的浏览器驱动配置，过于硬核。如果直接拿它去接 AI 应用，实在太重了。
+在此之前，我们手搓过一个针对小米云笔记的底层驱动：[`minote-driver`](https://github.com/Thetaio-Technology/MiNote-driver)。它确实能把事干成，但仓库里塞满了 Python 源码和繁琐的浏览器驱动配置，过于硬核。如果直接拿它去接 AI 应用，实在太重了。
 
 为了 AI Agent 能轻松接管，我们开坑了 `minote-skill`。
 
 简单来说，它俩的分工是这样的：
 > ⚙️ **`minote-driver`** 负责在底层啃硬骨头，**把事做成**。
+>
 > 🪄 **`minote-skill`** 负责在上层做封装，**让这事更好调用**。
 
 ---
@@ -63,11 +71,13 @@
 
 如果你已有 Python 环境，只需 5 步即可完成部署：
 
+**1. 克隆仓库**
+
 ```
 git clone 本仓库
 ```
 
-**2. 准备配置** 复制一份环境变量模版，并根据文件内的中文注释修改你的本地路径：
+**2. 准备配置** 复制一份环境变量模板，并根据文件内的中文注释修改你的本地路径：
 
 ```
 cp .env.example .env
@@ -93,9 +103,9 @@ python script/cli/open_mi_cloud.py
 
 ## 关于小米云笔记（MiNote）
 
-我的手机上常年存放着小米的便签板，因为HyperOS支持把这些常用的系统应用组建放到手机桌面作为一个小组件，我就在思考，有没有办法把这个小组件来接入Claude code、Open code呢？
+我的手机上常年存放着小米的便签板，因为 HyperOS 支持把这些常用的系统应用组件放到手机桌面作为一个小组件，我就在思考，有没有办法把这个小组件接入 Claude Code、OpenCode 呢？
 
-<img src="./assest/img1.jpg" alt="小米的便签板.jpg|300" style="zoom:30%;" />
+<img src="./assest/img1.jpg" alt="小米的便签板" width="30%" />
 
 ## 仓库内容
 
@@ -114,13 +124,7 @@ python script/cli/open_mi_cloud.py
 
 `minote-skill` 现在内置一份本地运行层，真实执行入口位于 `script/`。
 
-这个仓库更适合：
-
-- 对外展示 skill 能力
-- 承载 agent 集成文档
-- 承载机器可读 manifest
-- 作为从 `minote-driver` 同步发布出来的 skill 仓库
-- 在单仓库内完成 skill 安装与执行
+该仓库用于集中提供 `minote-skill` 的能力说明、集成文档与机器可读清单，并作为与 [`minote-driver`](https://github.com/Thetaio-Technology/MiNote-driver) 对应发布的 skill 仓库，支持在单一仓库内完成安装、配置与执行。
 
 如果你需要真实执行，请先阅读：`install.md`
 
