@@ -91,9 +91,9 @@ cp .env.example .env
 pip install selenium
 ```
 
-**4. 部署浏览器驱动** 
+**4. 下载浏览器驱动** 
 
-下载与你本地 Chrome 浏览器版本匹配的 `chromedriver.exe`，并将其放置到指定目录： `script/bin/chromedriver.exe`
+下载与你本地 Chrome 浏览器版本匹配的 `chromedriver.exe`，并将其放置到script目录： `script/bin/chromedriver.exe`
 
 **5. 首次登录授权** 运行以下脚本，完成小米云服务的首次登录（扫码或密码验证）：
 
@@ -107,7 +107,7 @@ python script/cli/open_mi_cloud.py
 >
 > 请**直接放弃上面的步骤**，跳转阅读 👉 **[`install.md`](./install.md)。
 >
-> 我们在里面为你准备了一键安装全套环境的自动化脚本和保姆级教程。
+> 我们在里面为你准备了一套保姆级教程
 
 ## 关于小米云笔记（MiNote）
 

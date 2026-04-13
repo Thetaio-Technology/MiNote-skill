@@ -8,3 +8,6 @@ script/chrome_profile/
 
 .DS_Store
 Thumbs.db
+
+
+conversations/*
