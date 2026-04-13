@@ -2,7 +2,7 @@
 
 # MiNote-skill
 
-### 不是再造一个浏览器驱动。
+### 把你的小米代办接入 AI
 
 ### 是把小米云笔记待办，变成 AI 和人都能直接调用的能力。
 
@@ -14,6 +14,8 @@
 </div>
 
 <div align="center">
+<br/>
+
 **把你的小米云笔记接入ai agent**
 
 <br/>
@@ -34,7 +36,7 @@
 
 <br/>
 
-你想把小米云笔记接进自己的产品或工作流？`minote-skill` 直接给你一层可调用封装。
+你想把小米云笔记接进自己的产品或工作流？ `minote-skill` 直接给你一层可调用封装。
 
 </div>
 
@@ -99,13 +101,19 @@ pip install selenium
 python script/cli/open_mi_cloud.py
 ```
 
-> 💡 **新手提示（小白专属通道）：** 如果你之前从未折腾过 Python、Selenium 或环境变量，请**直接放弃上面的步骤**，跳转阅读 👉 **[`install.md`](./install.md)**。我们在里面为你准备了一键安装全套环境的自动化脚本和保姆级教程。
+> 💡 **新手提示（小白专属通道）：
+>
+> 如果你之前从未折腾过 Python、Selenium 或环境变量
+>
+> 请**直接放弃上面的步骤**，跳转阅读 👉 **[`install.md`](./install.md)。
+>
+> 我们在里面为你准备了一键安装全套环境的自动化脚本和保姆级教程。
 
 ## 关于小米云笔记（MiNote）
 
 我的手机上常年存放着小米的便签板，因为 HyperOS 支持把这些常用的系统应用组件放到手机桌面作为一个小组件，我就在思考，有没有办法把这个小组件接入 Claude Code、OpenCode 呢？
 
-<img src="./assest/img1.jpg" alt="小米的便签板" width="30%" />
+<img src="./assest/img1.jpg" alt="小米的便签板" width="40%" />
 
 ## 仓库内容
 
@@ -126,5 +134,5 @@ python script/cli/open_mi_cloud.py
 
 该仓库用于集中提供 `minote-skill` 的能力说明、集成文档与机器可读清单，并作为与 [`minote-driver`](https://github.com/Thetaio-Technology/MiNote-driver) 对应发布的 skill 仓库，支持在单一仓库内完成安装、配置与执行。
 
-如果你需要真实执行，请先阅读：`install.md`
+如果你需要真实执行开发debug以及了解更多项目安装细节，请先阅读：`install.md`
 
