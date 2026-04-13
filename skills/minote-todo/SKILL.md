@@ -1,106 +1,47 @@
+---
+name: minote-todo
+description: Operate Xiaomi Cloud Notes todos through the existing local runtime when the user needs structured todo read and write actions without building a natural-language parser.
+---
+
 # MiNote Todo Skill
 
-## Purpose
+Use this skill when the user wants to operate Xiaomi Cloud Notes todos through the existing local runtime.
 
-This skill wraps the existing MiNote Selenium automation as a reusable local capability.
+## Do
 
-Use it when the user wants to operate Xiaomi Cloud Notes todos through the already-implemented local framework instead of building a natural-language parser.
+- Read pending todos.
+- Read completed todos.
+- Create a todo.
+- Update a todo title.
+- Complete a todo.
+- Restore a completed todo.
+- Delete a todo.
+- Map user intent directly to existing command names.
 
-## Scope
+## Do Not
 
-Supported operations:
-
-- Read pending todos
-- Read completed todos
-- Create a todo
-- Update a todo title
-- Complete a todo
-- Restore a completed todo
-- Delete a todo
-
-Explicitly out of scope:
-
-- Private notes
-- Private-note search and read
-- Building a Chinese natural-language parser
+- Claim support for private notes.
+- Add a Chinese natural-language parser unless the user explicitly asks for it.
+- Change the browser automation flow unless verification shows breakage.
+- Introduce new abstractions before reusing the current command surface.
 
 ## Runtime Assumptions
 
-- Windows machine
-- Google Chrome is installed
-- `bin/chromedriver.exe` matches the local Chrome version
-- The project-local browser profile is stored in `chrome_profile/`
-- The operator can log in manually the first time if the login state is missing
+- Use a Windows machine with Google Chrome installed.
+- Ensure `bin/chromedriver.exe` matches the local Chrome version.
+- Reuse the project-local browser profile when login state already exists.
+- Run the browser launcher first if login state is missing or expired.
 
-## Project Entry Points
+## Workflow
 
-- Browser launcher: `scripts/cli/open_mi_cloud.py`
-- Unified skill runner: `scripts/cli/run_skill.py`
-- CLI commands: `scripts/cli/mi_note_commands.py`
-- Client API: `src/minote/client.py`
-- Command executor: `src/minote/commands.py`
-- Detailed API notes: `API.md`
-- Interface contract: `skills/minote-todo/interface.md`
-- Usage examples: `skills/minote-todo/examples.md`
-- Execution checklist: `skills/minote-todo/checklist.md`
+1. Run `python scripts/cli/open_mi_cloud.py` if login may be missing or expired.
+2. Run `python scripts/cli/run_skill.py minote-todo <operation>` for structured execution.
+3. Return backend results with minimal reshaping.
+4. Treat `ok: false` as an execution failure and explain the operator-facing cause.
+5. Verify login state and DOM stability first when an operation fails.
 
-## Recommended Workflow
+## References
 
-1. If login state may be missing or expired, run:
-
-```bash
-python scripts/cli/open_mi_cloud.py
-```
-
-2. After the user finishes manual login, use the command runner:
-
-```bash
-python scripts/cli/run_skill.py minote-todo read-pending
-python scripts/cli/run_skill.py minote-todo create --title "明天下午买咖啡豆"
-python scripts/cli/run_skill.py minote-todo update --old-title "旧标题" --new-title "新标题"
-python scripts/cli/run_skill.py minote-todo complete --title "洗衣服"
-python scripts/cli/run_skill.py minote-todo restore --title "洗车"
-python scripts/cli/run_skill.py minote-todo delete --title "剪头发"
-
-python scripts/cli/mi_note_commands.py read-pending
-python scripts/cli/mi_note_commands.py read-completed
-python scripts/cli/mi_note_commands.py create "明天下午买咖啡豆"
-python scripts/cli/mi_note_commands.py update "旧标题" "新标题"
-python scripts/cli/mi_note_commands.py complete "洗衣服"
-python scripts/cli/mi_note_commands.py restore "洗车"
-python scripts/cli/mi_note_commands.py delete "剪头发"
-```
-
-3. For Python-level integration, prefer:
-
-```python
-from minote import execute_command
-
-result = execute_command("create", title="测试待办")
-print(result)
-```
-
-## Guidance For Future Skill Integration
-
-- Treat this repository as the execution backend.
-- Do not add a natural-language parser unless the user explicitly asks for one.
-- Prefer mapping structured user intent directly to existing command names.
-- Reuse the current command surface before introducing new abstractions.
-- If an operation fails, verify login state and current DOM stability first.
-
-## Standard Operating Rules
-
-- Prefer direct command mapping over natural-language parsing.
-- Return backend results with minimal reshaping.
-- Treat `ok: false` as an execution failure that needs operator-facing context.
-- Do not claim support for private notes.
-- Do not change the underlying browser automation flow unless verification shows breakage.
-
-## Validation
-
-Useful verification scripts:
-
-```bash
-python scripts/verify/verify_todo_crud.py
-python scripts/verify/verify_commands.py
-```
+- `references/interface.md`
+- `references/examples.md`
+- `references/checklist.md`
